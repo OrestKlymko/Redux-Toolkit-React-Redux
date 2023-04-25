@@ -6,7 +6,7 @@ import { addContact, removeContact } from '../redux/contactSlice';
 import { filterContacts } from '../redux/filterSlice';
 
 export function App() {
-  const contacts = useSelector(state => state.contacts.contact);
+  const contacts = useSelector(state => state.contacts.array);
   const filter = useSelector(state => state.filter);
 
   const dispatch = useDispatch();
