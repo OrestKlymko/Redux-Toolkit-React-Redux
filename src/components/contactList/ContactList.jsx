@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from 'redux/contactSlice';
 
 export function ContactList() {
-  const contacts = useSelector(state => state.contacts.contact);
+  const contacts = useSelector(state => state.contacts.array);
   const filter = useSelector(state => state.filter);
-  const state = useSelector(state => state);
+
   const dispatch = useDispatch();
-  console.log(contacts);
 
   const onDeleteContact = deleteItem => {
     dispatch(removeContact(deleteItem));
