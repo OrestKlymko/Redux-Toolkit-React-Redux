@@ -1,43 +1,47 @@
 import css from './contactlist.module.css';
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeContact } from 'redux/contactSlice';
 
-export class ContactList extends Component {
-  onDeleteContact = deleteItem => {
-    this.props.onClick(deleteItem);
+export function ContactList() {
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
+  const dispatch = useDispatch();
+  console.log(contacts);
+
+  const onDeleteContact = deleteItem => {
+    dispatch(removeContact(deleteItem));
   };
-  render() {
-    const { contacts, filter } = this.props;
-    return (
-      <>
-        <ul>
-          {contacts
-            .filter(item => item.name.toLowerCase().includes(filter))
-            .map(contact => {
-              return (
-                <li key={contact.name}>
-                  {contact.name}: {contact.number}
-                  <button
-                    className={css.deleteBtn}
-                    onClick={() => this.onDeleteContact(contact.id)}
-                  >
-                    Delete
-                  </button>
-                </li>
-              );
-            })}
-        </ul>
-      </>
-    );
-  }
+
+  return (
+    <>
+      <ul>
+        {contacts
+          .filter(item => item.name.toLowerCase().includes(filter))
+          .map(contact => {
+            return (
+              <li key={contact.name}>
+                {contact.name}: {contact.number}
+                <button
+                  className={css.deleteBtn}
+                  onClick={() => onDeleteContact(contact.id)}
+                >
+                  Delete
+                </button>
+              </li>
+            );
+          })}
+      </ul>
+    </>
+  );
 }
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-};
+// ContactList.propTypes = {
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.exact({
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ),
+// };
