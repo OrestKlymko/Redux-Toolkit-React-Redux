@@ -6,8 +6,9 @@ import { addContact, removeContact } from '../redux/contactSlice';
 import { filterContacts } from '../redux/filterSlice';
 
 export function App() {
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.contact);
   const filter = useSelector(state => state.filter);
+
   const dispatch = useDispatch();
 
   const onInput = data => {
