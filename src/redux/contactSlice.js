@@ -15,7 +15,8 @@ export const contactSlice = createSlice({
       state.array.push(actions.payload);
     },
     removeContact: (state, actions) => {
-      return state.array.filter(state => state.id !== actions.payload);
+      const index = state.array.findIndex(task => task.id === actions.payload);
+      state.array.splice(index, 1);
     },
   },
 });
